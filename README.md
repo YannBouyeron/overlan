@@ -106,6 +106,8 @@ Unix
 
 - `overlan -l 4444 -e /bin/bash` - BindShell listen on localhost port 4444.
 
+- `overlan -l 4444 -e pty:/bin/bash` - Interactive PTY BindShell listen on localhost port 4444. (Don't support password)
+
 - `overlan -l 4444 -e /bin/bash -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
 	
 - `overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
@@ -127,6 +129,8 @@ Windows
 Unix
 
 - `overlan localhost 4444 -e /bin/bash` - ReverseShell connect to listener on localhost port 4444.
+
+- `overlan localhost 4444 -e pty:/bin/bash` - Interactive PTY ReverseShell connect to listener on localhost port 4444. (Don't support password)
 
 - `overlan overlan 4444 -e /bin/bash` - ReverseShell connect to listener on overlan server port 4444.
 

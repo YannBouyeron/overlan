@@ -26,9 +26,10 @@ except ImportError:
     import socketserver as SocketServer
 
 
-if sys.platform.startswith("linux"):
+try
     import pty 
-
+except ImportError:
+    pass
 
 
 
