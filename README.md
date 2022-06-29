@@ -18,7 +18,7 @@ For full documentation visit [Overlan](http://141.94.203.12:8000).
 - AES derivation password protected
 - Cross Platform
 
-# Disclamer
+## Disclamer
 
 THIS SOFTWARE IS INTENDED ONLY FOR EDUCATION PURPOSES! DO NOT USE IT TO INFLICT
 DAMAGE TO ANYONE! USING MY APPLICATION YOU ARE AUTHOMATICALLY AGREE WITH ALL RULES AND
