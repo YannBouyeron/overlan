@@ -56,7 +56,7 @@ Listen on localhost port 4444
 	
 	overlan -l 4444
 
-Listen password protected reverse shell on localhost port 4444
+Listen on localhost port 4444 password protected
 	
 	overlan -l 4444 -k mysecret
 
@@ -70,7 +70,7 @@ Connect to localhost port 4444
 	
 	overlan localhost 4444
 
-Connect to password protected bind shell listening on localhost port 4444
+Connect to localhost port 4444 password protected 
 	
 	overlan localhost 4444 -k mysecret
 
