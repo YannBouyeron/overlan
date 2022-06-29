@@ -228,7 +228,7 @@ class Overlan:
 
             self.username="overlan"
             self.hostname="141.94.203.12"
-            self.port=12593
+            self.port=22
             self.password="overlan"
         
         else:
