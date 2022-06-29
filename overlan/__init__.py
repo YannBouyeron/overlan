@@ -26,7 +26,7 @@ except ImportError:
     import socketserver as SocketServer
 
 
-try
+try:
     import pty 
 except ImportError:
     pass
