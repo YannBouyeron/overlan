@@ -459,7 +459,7 @@ class Overlan:
             
             if not cmd or cmd == "":
 
-                pass
+                time.sleep(5)
             
             elif cmd.strip() == "cd":
 
