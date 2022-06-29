@@ -3,7 +3,7 @@
 
 Python Remote Access Tools
 
-For full documentation visit [Overlan](https://github.com/YannBouyeron/overlan).
+For full documentation visit [Overlan](http://141.94.203.12:8000).
 
 
 ## Functionality
