@@ -266,7 +266,7 @@ v = Overlan()
 
 ```
 
-Specify your VPS SSH server:
+Use on internet: Specify your VPS SSH server:
 
 ```
 from overlan import Overlan
