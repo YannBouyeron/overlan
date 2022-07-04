@@ -224,23 +224,14 @@ class Overlan:
             
         self.buffer = 1024*128
 
-        if username == None:
-
-            self.username="overlan"
-            self.hostname="141.94.203.12"
-            self.port=22
-            self.password="overlan"
-        
-        else:
-
-            self.username = username
-            self.hostname = hostname
-            self.port = port
-            self.password = password
+        self.username = username
+        self.hostname = hostname
+        self.port = port
+        self.password = password
 
     
     
-    def listen(self, port, host="127.0.0.1", executable=False, key=None, delay=1):
+    def listen(self, port, host="127.0.0.1", executable=False, key=None, delay=0.6):
 
         """
 
@@ -327,7 +318,7 @@ class Overlan:
                 t.start()
 
 
-    def connect(self, host, port, executable=False, key=None, delay=1):
+    def connect(self, host, port, executable=False, key=None, delay=0.6):
 
         """
         
@@ -341,8 +332,6 @@ class Overlan:
 
         """
 
-        if "overlan" in host:
-            host = "141.94.203.12"
 
         while True:
 
@@ -637,7 +626,7 @@ class Overlan:
         reverse_forward_tunnel(remote_port, remote_host, local_port, transport)
 
 
-    def rs(self, host, port, executable, key=None, delay=1):
+    def rs(self, host, port, executable, key=None, delay=0.6):
 
         """
         Threaded Reverse shell
@@ -653,7 +642,7 @@ class Overlan:
         rs.start()
 
 
-    def bs(self, port, executable, key=None, delay=1):
+    def bs(self, port, executable, key=None, delay=0.6):
 
         """
         Threaded Bind shell
@@ -721,9 +710,9 @@ def main():
                         action="store_true",
                         help="Connect to host and port specified")
 
-    parser.add_argument("-R", "--remote", type=int, help="Remote forward to remote_port") 
+    parser.add_argument("-R", "--remote", help="Remote forward to <username>:<host>:<port>:<password>:<remote_port>") 
 
-    parser.add_argument("-L", "--local", type=int, help="Local forward from remote_port")
+    parser.add_argument("-L", "--local", help="Local forward from <username>:<host>:<port>:<password>:<remote_port>")
 
     parser.add_argument("-k", "--key", help="Password for AES derivation key")
 
@@ -732,7 +721,31 @@ def main():
     args = parser.parse_args()
 
 
-    prt = Overlan()
+
+    if args.remote:
+
+        x = args.remote
+
+        x = x.split(":")
+
+        prt = Overlan(username=x[0], hostname=x[1], port=int(x[2]), password=x[3])
+
+        remote_port = int(x[4])
+
+    elif args.local:
+
+        x = args.local
+
+        x = x.split(":")
+
+        prt = Overlan(username=x[0], hostname=x[1], port=int(x[2]), password=x[3])
+
+        remote_port = int(x[4])
+
+    else:
+    
+        prt = Overlan()
+
 
     if args.key:
         key = args.key
@@ -757,7 +770,7 @@ def main():
             # bind shell remote forwarded
 
             prt.bs(args.port, args.execute, key=key)
-            prt.rf_tunnel(args.port, args.remote)
+            prt.rf_tunnel(args.port, remote_port)
             
 
         elif not args.execute and not args.remote:
@@ -772,7 +785,7 @@ def main():
             #prt.listen(args.port)
             prt.bs(args.port, False, delay=delay, key=key)
             # remote forwarde listener
-            prt.rf_tunnel(args.port, args.remote)
+            prt.rf_tunnel(args.port, remote_port)
     
     else:
 
@@ -794,15 +807,16 @@ def main():
 
             prt.rs(args.host, args.port, False, delay=delay, key=key)
         
-            prt.lf_tunnel(args.port, args.local)
+            prt.lf_tunnel(args.port, remote_port)
         
         elif args.remote:
 
-            prt.rf_tunnel(args.port, args.remote)
+            prt.rf_tunnel(args.port, remote_port)
 
         elif args.local:
             
-            prt.lf(args.port, args.local)
+            prt.lf(args.port, remote_port)
 
+#if __name__ == "__main__":
 
-
+    #main()

