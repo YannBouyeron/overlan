@@ -67,11 +67,9 @@ Git:
 
 Port forwarding requires using your own VPS with an SSH server. This allows you to expose a local service such as a http web server or tcp listener or bind shell on the internet.
 
-###### Creat tunneling restricted user overlan:
+Creat tunneling restricted user overlan:
 
 	sudo adduser overlan
-
-###### Set sshd_config:
 
 Go to /etc/ssh 
 
@@ -110,6 +108,9 @@ You have now a restricted user:
 
 	}
 
+Restart sshd:
+
+	sudo service restart sshd
 
 **Security Warning: If GatewayPorts is yes, enable remote forwarded bind shell without AES encryption is very dangerous ! Anybody can scan your IP and discover port running your remote forwarded bind shell and connect to it !**
 
