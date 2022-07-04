@@ -69,7 +69,7 @@ Port forwarding requires using your own VPS with an SSH server. This allows you 
 
 ###### Creat tunneling restricted user overlan:
 
-	sudo creatuser overlan
+	sudo adduser overlan
 
 ###### Set sshd_config:
 
