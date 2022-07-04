@@ -156,7 +156,11 @@ Remote forward localhost 4444 to your VPS port 8888
 
 Local forward from your VPS port 8888 to localhost 4444
 
-	overlan 8888 -L username:hostname:port:password:4444
+	overlan 4444 -L username:hostname:port:password:8888
+
+Local forward from your VPS port 8888 to 0.0.0.0 4444
+
+	overlan 0.0.0.0 4444 -L username:hostname:port:password:8888
 
 ###### SSH
 
