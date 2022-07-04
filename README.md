@@ -143,7 +143,7 @@ Connect to localhost port 4444 password protected
 
 Connect to your VPS port 4444
 	
-	overlan host 4444
+	overlan hostname 4444
 
 
 #### Port forwarding
