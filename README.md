@@ -95,6 +95,10 @@ Add resticted user overlan to sshd_config:
    	
 		PasswordAuthentication yes
 
+Restart sshd:
+
+	sudo service restart sshd
+
 You have now a restricted user:
 
 	{
@@ -108,9 +112,6 @@ You have now a restricted user:
 
 	}
 
-Restart sshd:
-
-	sudo service restart sshd
 
 **Security Warning: If GatewayPorts is yes, enable remote forwarded bind shell without AES encryption is very dangerous ! Anybody can scan your IP and discover port running your remote forwarded bind shell and connect to it !**
 
