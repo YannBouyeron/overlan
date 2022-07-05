@@ -63,11 +63,11 @@ Git:
 
 	python3 setup.py install
 	
-## Creat SSH tunneling server and user on your VPS (Facultative)
+## Create SSH tunneling server and user on your VPS (Facultative)
 
 Port forwarding requires using your own VPS with an SSH server. This allows you to expose a local service such as a http web server or tcp listener or bind shell on the internet.
 
-Creat tunneling restricted user overlan:
+Create tunneling restricted user overlan:
 
 	sudo adduser overlan
 
