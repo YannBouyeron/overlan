@@ -97,7 +97,7 @@ Add resticted user overlan to sshd_config:
 
 Restart sshd:
 
-	sudo service restart sshd
+	sudo service sshd restart
 
 You have now a restricted user:
 
