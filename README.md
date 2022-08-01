@@ -39,16 +39,16 @@ CAUSED BY THIS PROGRAM.
 
 Unix:
 
-	pip install overlan
+	pip install overlan3
 	
 	# or
 
-	python3 -m pip install overlan
+	python3 -m pip install overlan3
 	
 
 Windows:
 
-	py -m pip install overlan
+	py -m pip install overlan3
 	
 
 
