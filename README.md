@@ -37,24 +37,6 @@ CAUSED BY THIS PROGRAM.
 
 ## Install Overlan
 
-Unix:
-
-	pip install overlan3
-	
-	# or
-
-	python3 -m pip install overlan3
-	
-
-Windows:
-
-	py -m pip install overlan3
-	
-
-
-Git:
-
-
 	git clone https://github.com/YannBouyeron/overlan
 
 	cd overlan
